@@ -8,15 +8,15 @@ import {View, Text, Image} from 'react-native';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 import Chat from './components/Chat';
-r
+
 import colors from './assets/colors/colors';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator(); 
-const Tab = createBottomTabNavigator(); 
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
@@ -30,10 +30,10 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={Home} options={{
         tabBarIcon: ({focused}) => (
           <View>
-            <Image 
+            <Image
               source={require('./assets/icons/home.png')}
               style = {{
-                tintColor: focused ? colors.darkBlue : colors.gray, 
+                tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
@@ -42,10 +42,10 @@ const TabNavigator = () => {
       <Tab.Screen name="Navigation" component={Navigation} options={{
         tabBarIcon: ({focused}) => (
           <View>
-            <Image 
+            <Image
               source={require('./assets/icons/map.png')}
               style = {{
-                tintColor: focused ? colors.darkBlue : colors.gray, 
+                tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
@@ -54,10 +54,10 @@ const TabNavigator = () => {
       <Tab.Screen name = "Chat" component={Chat} options={{
         tabBarIcon: ({focused}) => (
           <View>
-            <Image 
+            <Image
               source={require('./assets/icons/chat.png')}
               style = {{
-                tintColor: focused ? colors.darkBlue : colors.gray, 
+                tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
