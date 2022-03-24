@@ -19,6 +19,6 @@ from users.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('users.urls')),
+    path('users/', include('users.urls')),
     path('', index, name="index"),
 ]
