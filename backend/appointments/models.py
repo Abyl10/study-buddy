@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from backend.users.models import User
 from django.core.exceptions import ValidationError
+from backend.users.models import User
+from backend.place.models import Place
 import datetime
 
 
@@ -13,6 +14,7 @@ class Appointment(models.Model):
     duration = models.IntegerField(validators=[MaxValueValidator(86400), MinValueValidator(1)])
     users = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
     mode = models.BooleanField(default=False)
+    place = models.OneToOneField(Place, on_delete=models.CASCADE, related_name='place')
     link = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
