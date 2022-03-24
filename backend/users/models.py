@@ -8,4 +8,4 @@ class User(models.Model):
     ifLogged = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{} -{}".format(self.username, self.email)
+        return f"{self.username}"

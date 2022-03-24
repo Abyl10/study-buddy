@@ -1,24 +1,33 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.core.exceptions import ValidationError
-from backend.users.models import User
-from backend.place.models import Place
-import datetime
+from django.utils.translation import gettext_lazy as _
+
+from users.models import User
+from place.models import Place
 
 
 class Appointment(models.Model):
-    name = models.CharField(max_length=20)
+    topic = models.CharField(max_length=50)
     subject = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     date = models.DateTimeField()
-    duration = models.IntegerField(validators=[MaxValueValidator(86400), MinValueValidator(1)])
-    users = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
-    mode = models.BooleanField(default=False)
-    place = models.OneToOneField(Place, on_delete=models.CASCADE, related_name='place')
-    link = models.CharField(max_length=255, blank=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def save(self, *args, **kwargs):
-        if self.date < datetime.date.today():
-            raise ValidationError("The date cannot be in the past!")
-        super(Appointment, self).save(*args, **kwargs)
+    time = models.TimeField()
+    offline_mode = models.BooleanField(default=True)
+    meeting_link = models.CharField(max_length=255, blank=True)
+    place = models.ForeignKey(
+        Place,
+        verbose_name=_("Place"),
+        on_delete=models.PROTECT,
+        related_name="place_appointments",
+    )
+    users = models.ManyToManyField(
+        User,
+        verbose_name=_("Users"),
+        related_name="appointment",
+        db_table="users_appointments",
+    )
+    host = models.ForeignKey(
+        User,
+        verbose_name=_("Host"),
+        on_delete=models.PROTECT,
+        related_name="host_appointments",
+    )
