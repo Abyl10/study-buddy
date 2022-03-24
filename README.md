@@ -1,4 +1,4 @@
 # study-buddy
 
-Backend - Django
+Backend - Django, 
 Frontend - React Native
