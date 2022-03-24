@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, 
-	Text, 
-	StyleSheet, 
-	Image, 
-	ScrollView, 
-	SafeAreaView, 
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	ScrollView,
+	SafeAreaView,
 	Button,
 } from 'react-native';
 import colors from '../assets/colors/colors';
@@ -16,14 +17,13 @@ import Feather from 'react-native-vector-icons/Feather';
 
 
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
 	return (
-		<View style={styles.container}> 
+		<View style={styles.container}>
 			<ScrollView>
-				{/*Header*/}
 				<SafeAreaView>
-					<View style = {styles.menuWrapper}> 
-						<Feather 
+					<View style={styles.menuWrapper}>
+						<Feather
 							name="menu"
 							size={25}
 							color={colors.black}
@@ -36,8 +36,8 @@ const Home = ({navigation}) => {
 				{/*h1 tag, and appointments*/}
 				<View style={styles.numAppointments}>
 					<Text style={styles.usernameTitle}>Hi Username,</Text>
-					<Text style={styles.usernameAppointments}>You have 
-						<Text style={{color:'red', fontFamily: 'Roboto-Medium', fontSize: 16}}> n appointments </Text>
+					<Text style={styles.usernameAppointments}>You have
+						<Text style={{ color: 'red', fontFamily: 'Roboto-Medium', fontSize: 16 }}> n appointments </Text>
 						today
 					</Text>
 				</View>
@@ -61,30 +61,30 @@ const styles = StyleSheet.create({
 	},
 
 	menuWrapper: {
-		marginHorizontal: 20, 
-		marginTop: 20, 
-		flexDirection: "row", 
+		marginHorizontal: 20,
+		marginTop: 20,
+		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
 	},
 
-	profileImage:{
-		width: 35, 
+	profileImage: {
+		width: 35,
 		height: 35,
-		borderRadius:10,	 
+		borderRadius: 10,
 	},
 
-	numAppointments:{
-		marginHorizontal: 20, 
-		marginTop: 20, 
+	numAppointments: {
+		marginHorizontal: 20,
+		marginTop: 20,
 	},
 
-	usernameTitle:{
+	usernameTitle: {
 		fontFamily: 'Roboto-Medium',
 		fontSize: 26,
 	},
 
-	usernameAppointments:{
+	usernameAppointments: {
 		marginTop: 5,
 		fontSize: 16,
 	},
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 20,
 		marginTop: 20,
 		backgroundColor: colors.whiteBlue,
-		width: 300, 
+		width: 300,
 		height: 100,
 	},
 

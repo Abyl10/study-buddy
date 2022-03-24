@@ -1,6 +1,6 @@
 //import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import React from 'react';
 import {View, Text, Image, SafeAreaView} from 'react-native';
@@ -23,53 +23,53 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      tabBarOptions = {{
+      tabBarOptions={{
         style: styles.tabBar,
         activeTintColor: colors.darkBlue,
         inactiveTintColor: colors.gray,
         showLabel: false,
       }}>
       <Tab.Screen name="Home" component={Home} options={{
-        tabBarIcon: ({focused}) => (
+        tabBarIcon: ({ focused }) => (
           <View>
             <Image
               source={require('./assets/icons/home.png')}
-              style = {{
+              style={{
                 tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
         ),
-      }}/>
+      }} />
       <Tab.Screen name="Navigation" component={Navigation} options={{
-        tabBarIcon: ({focused}) => (
+        tabBarIcon: ({ focused }) => (
           <View>
             <Image
               source={require('./assets/icons/map.png')}
-              style = {{
+              style={{
                 tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
         ),
-      }}/>
-      <Tab.Screen name = "Chat" component={Chat} options={{
-        tabBarIcon: ({focused}) => (
+      }} />
+      <Tab.Screen name="Chat" component={Chat} options={{
+        tabBarIcon: ({ focused }) => (
           <View>
             <Image
               source={require('./assets/icons/chat.png')}
-              style = {{
+              style={{
                 tintColor: focused ? colors.darkBlue : colors.gray,
               }}
             />
           </View>
         ),
-      }}/>
+      }} />
     </Tab.Navigator>
   );
 };
 
-const App = () =>  {
+const App = () => {
   return (
     <SafeAreaView style={{flex:1,}}>
       <Login />
@@ -79,8 +79,8 @@ const App = () =>  {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}}/>
-        <Stack.Screen name="Chat" component={Chat} options={{headerShown:false}}/>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );*/
