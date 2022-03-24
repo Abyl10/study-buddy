@@ -36,4 +36,4 @@ class Logout(generics.GenericAPIView):
 
 
 def index(request):
-    return redirect('/api/login')
+    return redirect('/users/login')
