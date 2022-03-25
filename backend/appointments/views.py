@@ -7,4 +7,3 @@ from .serializers import AppointmentSerializer
 
 class CreateAppointment(generics.CreateAPIView):
     queryset = Appointment.objects.all()
-    serializer_class = AppointmentSerializer
