@@ -14,7 +14,8 @@
 // export default Navigation;
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions,  TextInput, TouchableOpacity} from "react-native";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MapView, { Marker, Circle } from "react-native-maps";
 import * as Location from "expo-location";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -76,6 +77,8 @@ const App = (props) => {
 
   return (
     <View style={styles.container}>
+
+
       <StatusBar style="auto" />
       <MapView
         initialRegion={mapRegion}
@@ -125,6 +128,33 @@ const App = (props) => {
             ))
           : null}
       </MapView>
+
+      <View style={styles.searchBoxHeader}>
+        <View style={styles.searchBox}>
+          <Ionicons name="ios-search" size={20} style={{marginLeft: 5,}}/>
+          <TextInput
+            placeholder="Search here"
+            placeholderTextColor="#000"
+            autoCapitalize="none"
+            style={{flex:1,padding:0, marginLeft: 5}}
+          />
+          <Ionicons name="filter-outline" size={20} style={{marginHorizontal: 10}} />
+
+
+        </View>
+        <View style = {styles.check}>
+          <TouchableOpacity>
+            <View styles={styles.verified}>
+              <Text styles={styles.verifiedText}>Верифицированные</Text>
+            </View>
+          </TouchableOpacity>
+          <View styles={styles.notverified}>
+            <Text> Неверифицированные</Text>
+          </View>
+
+        </View>
+
+      </View>
     </View>
   );
 };
@@ -135,6 +165,41 @@ const styles = StyleSheet.create({
     width,
     height
   },
+  searchBoxHeader: {
+    backgroundColor: '#29303E',
+    width: '100%',
+    height: 150,
+    justifyContent: 'space-around',
+  },
+  searchBox: {
+      //position:'absolute',
+      marginTop: Platform.OS === 'ios' ? 40 : 20,
+      flexDirection:"row",
+      backgroundColor: '#fff',
+      width: '90%',
+      alignSelf:'center',
+      borderRadius: 7,
+      padding: 10,
+      //shadowColor: '#ccc',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.5,
+      shadowRadius: 5,
+      elevation: 10,
+    },
+
+    check: {
+      flexDirection: 'row',
+      marginHorizontal: 20,
+    },
+    verified: {
+      width: 160,
+      height: 25,
+      backgroundColor: '#fff',
+    },
+    verifiedText: {
+      color: "#fff",
+    },
+    notverified: {},
   mapView: {
 		//opacity: 0.2,
     position: "absolute",
@@ -142,9 +207,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    width,
-    height,
+
   },
+
   circle: {
     width: 26,
     height: 26,
@@ -172,6 +237,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
 
   }
+
 });
 
 export default App;

@@ -8,6 +8,7 @@ import {View, Text, Image} from 'react-native';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 import Chat from './components/Chat';
+import Messages from './components/Messages';
 
 import colors from './assets/colors/colors';
 
@@ -67,12 +68,27 @@ const TabNavigator = () => {
   );
 };
 
+const MessageStack = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen name="Список чатов" component={Chat} />
+    <Stack.Screen
+      name="Messages"
+      component={Messages}
+      options={({route}) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false,
+      })}
+    />
+  </Stack.Navigator>
+);
+
 const App = () =>  {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}}/>
         <Stack.Screen name="Chat" component={Chat} options={{headerShown:false}}/>
+        <Stack.Screen name="Messages" component={MessageStack} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
