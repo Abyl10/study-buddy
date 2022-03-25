@@ -3,17 +3,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import {View, Text, Image, SafeAreaView} from 'react-native';
 
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 import Chat from './components/Chat';
-
+import Welcome from './screens/Welcome';
+import Login from './screens/Login';
 import colors from './assets/colors/colors';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createAppContainer} from 'react-navigation';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,13 +71,19 @@ const TabNavigator = () => {
 
 const App = () => {
   return (
+    <SafeAreaView style={{flex:1,}}>
+      <Login />
+    </SafeAreaView>
+  );
+  /*
+  return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  );*/
 };
 
 const styles = StyleSheet.create({
