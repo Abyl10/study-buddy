@@ -6,7 +6,7 @@ from .models import User
 from .serializers import UserSerializer, UserLoginSerializer, UserLogoutSerializer
 
 
-class Record(generics.ListCreateAPIView):
+class Register(generics.ListCreateAPIView):
     # get method handler
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -36,4 +36,4 @@ class Logout(generics.GenericAPIView):
 
 
 def index(request):
-    return redirect('/api/login')
+    return redirect('/users/login')
