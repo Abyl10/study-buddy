@@ -7,3 +7,6 @@ class Place(models.Model):
     verified = models.BooleanField(default=False)
     lat = models.DecimalField(max_digits=20, decimal_places=10)
     lng = models.DecimalField(max_digits=20, decimal_places=10)
+
+    def __str__(self):
+        return self.name
