@@ -15,7 +15,7 @@ const otherAppointments = [
 	},
 	{
 		id: 'otherAppointment-3', 
-		title: 'Midterm Preparation', 
+		title: 'Midterm Prep', 
 		location: 'Coworking DC lab',
 		date: '22/03/2022', 
 		subject: 'Geometry',

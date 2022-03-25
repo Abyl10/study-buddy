@@ -1,3 +1,5 @@
+import { styles } from './styles.js';
+
 import React, { useState } from 'react';
 import {View,
 	Text,

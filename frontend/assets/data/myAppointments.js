@@ -8,8 +8,8 @@ const myAppointments = [
 	},
 	{
 		id: 'appointment-2', 
-		title: 'Midterm Preparation', 
-		location: 'Coworking DC lab',
+		title: 'Midterm Prep', 
+		location: 'Online',
 		date: '22/03/2022', 
 		subject: 'Chemistry',
 	},

@@ -10,6 +10,7 @@ import Navigation from './components/Navigation';
 import Chat from './components/Chat';
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
+import Register from './screens/Register';
 import colors from './assets/colors/colors';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -23,6 +24,9 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+      screenOption={{
+        headerShown: false,
+      }}
       tabBarOptions = {{
         style: styles.tabBar,
         activeTintColor: colors.darkBlue,
@@ -70,20 +74,20 @@ const TabNavigator = () => {
 };
 
 const App = () =>  {
-  return (
-    <SafeAreaView style={{flex:1,}}>
-      <Login />
-    </SafeAreaView>
-  );
-  /*
+  // return (
+  //   <SafeAreaView style={{flex:1,}}>
+  //     <Home/>
+  //   </SafeAreaView>
+  //);
+  
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}}/>
         <Stack.Screen name="Chat" component={Chat} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
-  );*/
+  );
 };
 
 const styles = StyleSheet.create({
