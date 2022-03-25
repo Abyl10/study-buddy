@@ -1,0 +1,16 @@
+services:
+    finder:
+        build: .
+        command: uvicorn app.main:app --host 0.0.0.0
+        volumes:
+            - .:/app
+        ports:
+            - 8008:8000
+        depends_on:
+            - mongo
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
