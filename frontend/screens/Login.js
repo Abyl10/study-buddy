@@ -151,10 +151,10 @@ const Login = ({navigation}) => {
 
 			{/*Ещё нет аккаунта?*/}
 			<View style={styles.signUp}>
-				<Text style={styles.signUpText}>Ещё нет аккаунта?</Text>
 				<TouchableOpacity
-					onPress={()=> navigation.navigate('Register')}
+					onPress={() => navigation.navigate('Register')}
 				>
+				    <Text style={styles.signUpText}>Ещё нет аккаунта?</Text>
 				</TouchableOpacity>
 			</View>
 
@@ -225,7 +225,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	signUpText: {
-
+		fontFamily: "Roboto",
+		fontWeight: '500',
+		color: "#4754F0",
+		fontSize: 14,
 	},
 
 	/////////button/////////

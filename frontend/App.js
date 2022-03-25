@@ -16,6 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createAppContainer} from 'react-navigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import AuthStackNavigator from './navigation/Navigate'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,7 +73,7 @@ const TabNavigator = () => {
 const App = () => {
   return (
     <SafeAreaView style={{flex:1,}}>
-      <Login />
+      <AuthStackNavigator />
     </SafeAreaView>
   );
   /*
