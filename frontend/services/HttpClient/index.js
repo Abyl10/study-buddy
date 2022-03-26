@@ -1,0 +1,17 @@
+import axios from "axios";
+
+export default class HttpClient {
+  constructor() {
+    this.client = axios.create({
+      baseURL: "http://10.201.3.123:8000",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    this.client.interceptors.request.use(config => {
+      console.log('Request: ', config);
+      return config;
+    }, err => Promise.reject(err),
+    );
+  }
+}

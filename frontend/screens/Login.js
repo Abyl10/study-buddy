@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {View,
 	Text,
 	Button,
@@ -8,10 +8,16 @@ import {View,
 	Dimensions,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { observer } from 'mobx-react';
+import { AppContext } from '../context/App';
 //import { AuthContext } from '../components/context';
 ////gjytj 
 
 const Login = ({navigation}) => {
+
+	const {
+		stores: {authStore, signinStore},
+	} = useContext(AppContext)
 
 	const [data, setData] = React.useState({
 		email: '',
@@ -21,8 +27,6 @@ const Login = ({navigation}) => {
     isValidUser: true,
     isValidPassword: true,
 	});
-
-	//const { signIn } = React.useContext(AuthContext);
 
 	const textInputChange = (text) => {
 		if (text.trim().length >= 4) {
@@ -84,25 +88,27 @@ const Login = ({navigation}) => {
 
 	//handle the username;
   const loginHandle = (userName, password) => {
+		signinStore.signIn('miko', '123456');
+		console.log("HANDLE LOGIN");
 
-    const foundUser = Users.filter( item => {
-        return userName == item.username && password == item.password;
-    } );
+    // const foundUser = Users.filter( item => {
+    //     return userName == item.username && password == item.password;
+    // } );
 
-    if ( data.username.length == 0 || data.password.length == 0 ) {
-      Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-        {text: 'Okay'}
-      ]);
-      return;
-    }
+    // if ( data.username.length == 0 || data.password.length == 0 ) {
+    //   Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+    //     {text: 'Okay'}
+    //   ]);
+    //   return;
+    // }
 
-    if ( foundUser.length == 0 ) {
-      Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-        {text: 'Okay'}
-      ]);
-      return;
-    }
-    signIn(foundUser);
+    // if ( foundUser.length == 0 ) {
+    //   Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+    //     {text: 'Okay'}
+    //   ]);
+    //   return;
+    // }
+    // signIn(foundUser);
 	}
 
 	return (
@@ -249,4 +255,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Login; 
+export default observer(Login); 
