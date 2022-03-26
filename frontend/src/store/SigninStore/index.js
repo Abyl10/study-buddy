@@ -18,8 +18,8 @@ export default class SigninStore extends BaseStore {
   async signIn(username, password) {
     await this.makeRequest({
       request: () => this.authMock.signIn(username, password),
-      success: () => {
-        this.authStore.setAuthorized(true);
+      success: (res) => {
+        this.authStore.setAuthorized(true, res.username);
         console.log('signin success');
       },
       error: () => {

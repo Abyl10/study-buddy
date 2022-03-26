@@ -3,7 +3,7 @@ import axios from "axios";
 export default class HttpClient {
   constructor() {
     this.client = axios.create({
-      baseURL: "http://10.201.3.123:8000",
+      baseURL: "http://10.110.97.118:8000",
       headers: {
         "Content-Type": "application/json",
       },

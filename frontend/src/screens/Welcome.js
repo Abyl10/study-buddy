@@ -5,13 +5,10 @@ import { StyleSheet,
 	Text, 
 	Image, 
 	SafeAreaView} from "react-native";
-//import {SVGImg} from '../assets/icons/logo.svg';
-import { NavigationContainer } from '@react-navigation/native';
-//import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Welcome = ({props}) =>{
-	//const navigation = useNavigation();
+	const navigation = useNavigation();
   return (
     <View style={styles.container}> 
       <View style={styles.rect}>
@@ -26,7 +23,7 @@ const Welcome = ({props}) =>{
       	</Text>
       </View>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("Login")}
+        onPress={() => navigation.navigate('Login')}
         style={styles.button}
        >
       	<Text style={styles.start}>Начать</Text>
@@ -50,7 +47,6 @@ const styles = StyleSheet.create({
   },
   start: {
     alignItems: 'center',
-    fontFamily: "roboto-500",
     color: "#fff",
     fontSize: 16
   },
@@ -67,14 +63,12 @@ const styles = StyleSheet.create({
   	textAlign: "center",
   },
   loremIpsum: {
-    fontFamily: "roboto-500",
     color: "#303030",
     fontSize: 24,
     textAlign: "center",
     marginTop: 69,
   },
   loremIpsum2: {
-    fontFamily: "roboto-500",
     color: "#8C8C8C",
     lineHeight: 16,
     textAlign: "center",

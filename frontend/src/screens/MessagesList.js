@@ -11,7 +11,7 @@ import {
   PostTime,
   MessageText,
   TextSection,
-} from '../messageStyles';
+} from '../assets/styles/messageStyles';
 
 const Messages = [
   {
@@ -57,7 +57,7 @@ const Messages = [
 ];
 
 
-const MessagesScreen = ({navigation}) => {
+const MessagesList = ({navigation}) => {
     return (
       <View style={styles.container}>
         <FlatList
@@ -84,7 +84,7 @@ const MessagesScreen = ({navigation}) => {
     );
 };
 
-export default MessagesScreen;
+export default MessagesList;
 
 const styles = StyleSheet.create({
   container: {

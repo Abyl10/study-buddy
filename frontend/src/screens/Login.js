@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {View,
 	Text,
 	Button,
@@ -16,7 +16,7 @@ import { AppContext } from '../context/App';
 const Login = ({navigation}) => {
 
 	const {
-		stores: {authStore, signinStore},
+		stores: {signinStore},
 	} = useContext(AppContext)
 
 	const [data, setData] = React.useState({
@@ -88,7 +88,7 @@ const Login = ({navigation}) => {
 
 	//handle the username;
   const loginHandle = (userName, password) => {
-		signinStore.signIn('miko', '123456');
+		signinStore.signIn('miko1', '12345');
 		console.log("HANDLE LOGIN");
 
     // const foundUser = Users.filter( item => {
@@ -123,7 +123,7 @@ const Login = ({navigation}) => {
 				 	autoCapitalize="none"
 				 	onChangeText={(text)=>textInputChange(text)}
 				 	onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-				 /> 
+				 />
 			</View>
 
 			<View style={styles.inputPassword}>
@@ -165,14 +165,12 @@ const Login = ({navigation}) => {
 			</View>
 
 			{/*button*/}
-			<View style={styles.button}>
-				<TouchableOpacity
-          style={styles.signIn}
-          onPress={() => {loginHandle( data.username, data.password )}}
-      	>
-					<Text style={styles.signIn}>Sign in</Text>
-				</TouchableOpacity>
-			</View>
+			<TouchableOpacity
+				style={styles.button}
+				onPress={() => {loginHandle( data.username, data.password )}}
+			>
+				<Text style={styles.signIn}>Sign in</Text>
+			</TouchableOpacity>
 		</View>
 	)
 }
@@ -224,7 +222,6 @@ const styles = StyleSheet.create({
 		marginRight: 15,
 	},
 
-	///////еще нет аккаунта///////
 	signUp: {
 		marginTop: 40,
 		alignItems: 'center',
@@ -237,15 +234,14 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 	},
 
-	/////////button/////////
 	button: {
 		backgroundColor: "#979AC2",
+		justifyContent: 'center',
+		alignItems: 'center',
 		marginHorizontal: 24,
 		marginTop: 35,
 		borderRadius: 8,
 		height: 56,
-		justifyContent: 'center',
-		alignItems: 'center',
 	},
 	signIn: {
 		fontFamily: "Roboto",

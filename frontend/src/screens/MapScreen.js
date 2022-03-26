@@ -22,7 +22,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("screen");
 
-const App = (props) => {
+const MapScreen = (props) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRegion, setMapRegion] = useState(null);
@@ -240,4 +240,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default App;
+export default MapScreen;

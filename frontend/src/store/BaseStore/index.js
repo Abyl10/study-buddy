@@ -20,11 +20,12 @@ export default class BaseStore {
       const res = await request();
       console.log("SUCCESS IN BASE STORE");
       console.log(JSON.stringify(res));
-      // if (res.success) {
-      //   success();
-      // }
+      if (res.status === 200) {
+        success(res.data);
+      }
     } catch (e) {
       console.log('BaseStore makeRequest error: ', e);
+      console.log(JSON.stringify(res));
       if (error) {
         error();
       }
