@@ -20,6 +20,7 @@ import {createAppContainer} from 'react-navigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AuthStackNavigator from './navigation/Navigate'
+import AppContextProvider from './context/App';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

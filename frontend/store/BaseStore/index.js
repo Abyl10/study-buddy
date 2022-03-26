@@ -12,4 +12,29 @@ export default class BaseStore {
     this.loading = false;
     this.error = '';
   }
+
+  async makeRequest({request, success, error, onFinal}) {
+    this.loading = true
+    try {
+      console.log('MAKE REQUEST')
+      const res = await request();
+      console.log("SUCCESS IN BASE STORE");
+      console.log(JSON.stringify(res));
+      // if (res.success) {
+      //   success();
+      // }
+    } catch (e) {
+      console.log('BaseStore makeRequest error: ', e);
+      if (error) {
+        error();
+      }
+    }
+    if (onFinal) {
+      onFinal();
+    }
+  }
+
+  setError(error) {
+    this.error = error;
+  }
 }
