@@ -148,8 +148,18 @@ const Home = ({navigation}) => {
 
 				{/*Your appointments*/}
 				<View style={styles.yAppointments}>
-					<Text style={styles.yAppointmentsText}>Your Appoinments</Text>
-					<Image source={require('../assets/images/exmark.png')} marginLeft={10}/>
+					<View style={{flexDirection: 'row'}}>
+						<Text style={styles.yAppointmentsText}>Your Appoinments</Text>
+						<Image source={require('../assets/images/exmark.png')} marginLeft={10}/>
+					</View>
+					<TouchableOpacity onPress={() => navigation.navigate('CreateAppointment')}>
+						<Feather 
+							name="plus"
+							size={30}
+							color="#3F8AE0"
+
+						/>
+					</TouchableOpacity>
 				</View>
 
 				{/*scrool horizontal*/}
@@ -302,6 +312,8 @@ const styles = StyleSheet.create({
 		marginHorizontal: 20,
 		marginTop: 25,
 		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	yAppointmentsText:{
 		fontWeight: '500',
