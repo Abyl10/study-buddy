@@ -18,10 +18,9 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="AuthStack">
         {
-          authStore.isAuthorized ? (<Stack.Screen name="HomeTabs" component={HomeTabs} />)
+          authStore.isAuthorized ? (<Stack.Screen name="MainStack" component={MainStack} />)
           : (<Stack.Screen name="AuthStack" component={AuthStack} />)
         }
-        <Stack.Screen name="MainStack" component={MainStack} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -22,6 +22,7 @@ export default class BaseStore {
       console.log(JSON.stringify(res));
       if (res.status === 200) {
         success(res.data);
+        this.loading = false;
       }
     } catch (e) {
       console.log('BaseStore makeRequest error: ', e);
@@ -29,6 +30,7 @@ export default class BaseStore {
       if (error) {
         error();
       }
+      this.loading = false;
     }
     if (onFinal) {
       onFinal();

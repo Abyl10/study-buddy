@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, 
 	Text, 
 	StyleSheet, 
@@ -8,6 +8,7 @@ import {View,
 	Button,
 	TouchableOpacity,
 	FlatList,
+	RefreshControl,
 } from 'react-native';
 import colors from '../assets/colors/colors';
 import myAppointments from '../assets/data/myAppointments';
@@ -16,6 +17,7 @@ import profile from '../assets/images/profile.png';
 //import {SafeAreaView} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import { AppContext } from '../context/App';
+import { observer } from 'mobx-react';
 //import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -26,7 +28,7 @@ const Home = ({navigation}) => {
 				<Text style={{
 					fontWeight:'500',fontSize: 16, marginTop: 20, marginHorizontal: 20
 				}}>
-				{item.title}
+				{item.topic}
 				</Text>
 				<View style={styles.subject}>
 					<Text style={{fontFamily: 'Roboto', color: colors.green, fontWeight: '400', marginHorizontal: 6}}>
@@ -51,7 +53,7 @@ const Home = ({navigation}) => {
 						color={colors.blue}
 						style={{marginRight: 3, marginTop: 1.5}}
 					/>
-					<Text style={styles.dataText}>{item.location}</Text>
+					<Text style={styles.dataText}>{item.place.name}</Text>
 				</View>
 
 			</TouchableOpacity>
@@ -60,11 +62,15 @@ const Home = ({navigation}) => {
 
 	const renderOtherAppoinmentsItem = ({item}) => {
 		return (
-			<TouchableOpacity style={styles.myAppointmentsView}>
+			<TouchableOpacity style={styles.myAppointmentsView} onPress={() => {
+				appointmentsStore.joinAppointment(authStore.username, item.id)
+				appointmentsStore.getAppointments(authStore.username);
+				appointmentsStore.getMyAppointments(authStore.username);
+			}}>
 				<Text style={{
 					fontWeight:'500',fontSize: 16, marginTop: 20, marginHorizontal: 20, fontFamily: 'Roboto',
 				}}>
-				{item.title}
+				{item.topic}
 				</Text>
 				<View style={styles.subject}>
 					<Text style={{fontFamily: 'Roboto', color: colors.green, fontWeight: '400', marginHorizontal: 6}}>
@@ -89,18 +95,30 @@ const Home = ({navigation}) => {
 						color={colors.blue}
 						style={{marginRight: 3, marginTop: 1.5}}
 					/>
-					<Text style={styles.dataText}>{item.location}</Text>
+					<Text style={styles.dataText}>{item.place.name}</Text>
 				</View>
 
 			</TouchableOpacity>
 		);
 	};
 
-	const {stores: {authStore}} = useContext(AppContext);
-//src -> assets, screens, components, 	
+	const {stores: {authStore, appointmentsStore}} = useContext(AppContext);
+
+	useEffect(() => {
+		appointmentsStore.getAppointments(authStore.username);
+		appointmentsStore.getMyAppointments(authStore.username);
+	}, []);
 	return (
 		<SafeAreaView style={styles.container}> 
-			<ScrollView>
+			<ScrollView refreshControl={
+				<RefreshControl
+					refreshing={appointmentsStore.loading}
+					onRefresh={() => {
+						appointmentsStore.getAppointments(authStore.username);
+						appointmentsStore.getMyAppointments(authStore.username);
+					}}
+				/>
+			}>
 				{/*Header*/}
 				<SafeAreaView>
 					<View style = {styles.menuWrapper}> 
@@ -140,7 +158,7 @@ const Home = ({navigation}) => {
 						</Text>
 					</View>
 					<View style={styles.findNowButton}>
-						<TouchableOpacity>
+						<TouchableOpacity onPress={() => navigation.navigate('PerfectMatch')}>
 							<Text style={styles.findNowText}>Find now</Text>
 						</TouchableOpacity>
 					</View>
@@ -155,8 +173,9 @@ const Home = ({navigation}) => {
 				{/*scrool horizontal*/}
 				<View>
 					<FlatList 
-						data={myAppointments}
+						data={appointmentsStore.myAppointments}
 						renderItem={renderMyAppoinmentsItem}
+						key={item => item.topic}
 						horizontal
 						showsHorizontalScrollIndicator={false}
 						style={{paddingVertical: 10}}
@@ -172,7 +191,7 @@ const Home = ({navigation}) => {
 				{/*scrool horizontal*/}
 				<View>
 					<FlatList 
-						data={otherAppointments}
+						data={appointmentsStore.appointments}
 						renderItem={renderOtherAppoinmentsItem}
 						horizontal
 						showsHorizontalScrollIndicator={false}
@@ -404,4 +423,4 @@ const styles = StyleSheet.create({
 	}, 
 });
 
-export default Home;
+export default observer(Home);
