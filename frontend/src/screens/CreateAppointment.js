@@ -1,17 +1,25 @@
-import React, {useState} from 'react';
+import { observer } from 'mobx-react';
+import React, {useState, useContext} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context'; 
 import Feather from 'react-native-vector-icons/Feather';
+import { AppContext } from '../context/App';
 
 const CreateAppointment = ({navigation}) => {
 	const [isOffline, setIsOffline] = useState(false);
 
+	const {stores: {authStore, appointmentsStore}} = useContext(AppContext);
+
 	const [subject, setSubject] = useState('');
 	const [topic, setTopic] = useState('');
-	const [level, setLevel] = useState(0); 
 	const [place, setPlace] = useState('');
-	const [data, setData] = useState('');
 	const [zoomLink, setZoomLink] = useState('');
+
+	const submit = () => {
+		console.log('HEHEHEHE');
+		appointmentsStore.createAppointment(subject, topic, authStore.username, place);
+		navigation.navigate('Home');
+	}
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.header}>
@@ -46,7 +54,7 @@ const CreateAppointment = ({navigation}) => {
 							 	style={styles.textInput}
 							 	autoCapitalize="none"
 							 	height={56}
-							 	onChange={setSubject}
+							 	onChangeText={setSubject}
 							 />
 							</View>
 
@@ -59,20 +67,7 @@ const CreateAppointment = ({navigation}) => {
 							 	style={styles.textInput}
 							 	autoCapitalize="none"
 							 	height={56}
-							 	onChange={setTopic}
-							 />
-							</View>
-
-							<View style={styles.allHeaderView}>
-								<Text style={styles.allHeaders}>Уровень (от 1 до 5)</Text>
-							</View>
-							<View style={styles.inputUsername}>
-							 <TextInput 
-							 	placeholder = "Введите число"
-							 	style={styles.textInput}
-							 	autoCapitalize="none"
-							 	height={56}
-							 	onChange={setLevel}
+							 	onChangeText={setTopic}
 							 />
 							</View>
 
@@ -85,25 +80,12 @@ const CreateAppointment = ({navigation}) => {
 							 	style={styles.textInput}
 							 	autoCapitalize="none"
 							 	height={56}
-							 	onChange={setPlace}
+							 	onChangeText={setPlace}
 							 />
 							</View>
 
-							<View style={styles.allHeaderView}>
-								<Text style={styles.allHeaders}>Дата и время</Text>
-							</View>
-							<View style={styles.inputUsername}>
-							 <TextInput 
-							 	placeholder = "Placeholder"
-							 	style={styles.textInput}
-							 	autoCapitalize="none"
-							 	height={56}
-							 	onChange={setData}
-							 />
-							</View>
-
-							<TouchableOpacity style={styles.button}>
-				      	<Text style={styles.start}>Начать</Text>
+							<TouchableOpacity style={styles.button} onPress={submit}>
+				      	<Text style={styles.start}>Создать</Text>
 				      </TouchableOpacity>
 
 						</ScrollView>
@@ -155,7 +137,8 @@ const CreateAppointment = ({navigation}) => {
 							</TouchableOpacity>
 
 							<TouchableOpacity
-				        style={styles.button}>
+				        style={styles.button}
+								>
 				      	<Text style={styles.start}>Начать</Text>
 				      </TouchableOpacity>
 						</View>
@@ -253,5 +236,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateAppointment;
+export default observer(CreateAppointment);
 

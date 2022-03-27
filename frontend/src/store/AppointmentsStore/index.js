@@ -44,4 +44,18 @@ export default class AppointmentsStore extends BaseStore {
       success: () => console.log('SUCCES JOIN'),
     })
   }
+
+  removeAppointment(username, appointmentId) {
+    this.makeRequest({
+      request: () => this.appointmentsMock.removeAppointment(username, appointmentId),
+      success: () => console.log('SUCCES Remove'),
+    })
+  }
+
+  createAppointment(subject, topic, username, place) {
+    this.makeRequest({
+      request: () => this.appointmentsMock.createAppointment(subject, topic, username, place),
+      success: () => console.log('SUCCES create'),
+    })
+  }
 }

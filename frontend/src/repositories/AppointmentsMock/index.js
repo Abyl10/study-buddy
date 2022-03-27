@@ -5,7 +5,7 @@ export default class AppointmentsMock extends NetApi {
   myAppointmentsUrl = '/users/get_appointments/';
   appointmentsUrl = '/appointments/';
   joinAppointmentUrl = '/appointments/join/';
-
+  createAppointmentUrl = '/appointments/create/';
   constructor(http) {
     super(http);
   }
@@ -31,6 +31,26 @@ export default class AppointmentsMock extends NetApi {
       return await this.post(this.joinAppointmentUrl, {}, {username: username, appointment_id: appointmentId});
     } catch (e) {
       console.log('AppointmentsMock joinAppointment error:' + JSON.stringify(e));
+    }
+  }
+
+  async removeAppointment(username, appointmentId) {
+    try {
+      return await this.post(this.removeAppointment, {}, {username: username, appointment_id: appointmentId});
+    } catch (e) {
+      console.log('AppointmentsMock joinAppointment error:' + JSON.stringify(e));
+    }
+  }
+
+  async createAppointment(subject, topic, username, place) {
+    try {
+      console.log('sub:' + subject);
+      console.log('top:' + topic);
+      console.log('us: ' + username);
+      console.log('pl: ' + place);
+      return await this.post(this.createAppointmentUrl, {}, {subject: subject, topic: topic, host_username: username, place_name: place});
+    } catch (e) {
+      console.log('AppointmentsMock createAppointment error:' + JSON.stringify(e));
     }
   }
 }
