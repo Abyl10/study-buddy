@@ -1,18 +1,22 @@
-import React, { useMemo, useRef, useCallback, useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
+import React, { useMemo, useRef, useCallback, useState, useEffect, useContext } from 'react';
+import { Text, StyleSheet, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet from '@gorhom/bottom-sheet';
 import colors from '../assets/colors/colors';
+import { AppContext } from '../context/App';
+import HttpClient from '../services/HttpClient';
+import { observer } from 'mobx-react';
 
 const PerfectMatch = () => {
+  const {stores: {authStore}} = useContext(AppContext);
 
   const bottomSheetRef = useRef(null);
-
   const [loaded, setLoaded] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [match, setMatch] = useState('');
 
-  const snapPoints = useMemo(() => [100, '100%'], []);
+  const snapPoints = useMemo(() => [100, 350], []);
 
   const handleSheetChanges = useCallback((index) => {
     console.log('handleSheetChanges', index);
@@ -37,8 +41,22 @@ const PerfectMatch = () => {
     setExpanded(false);
   }
 
-  const search = () => {
-    setLoaded(!loaded);
+  useEffect(() => {
+    if (loading) {
+      bottomSheetRef.current.snapToIndex(0);
+
+    }
+  }, [loading]);
+
+  const search = async () => {
+    const client = new HttpClient();
+    console.log(authStore.username);
+    setLoaded(false);
+    setLoading(true);
+    const res = await client.client.post('users/match_user/', {username: authStore.username})
+    setMatch(res.data.username);
+    setLoading(false);
+    setLoaded(true);
   }
 
   return (
@@ -63,18 +81,26 @@ const PerfectMatch = () => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity style={styles.sheetExpand} onPress={expand}>
-                <Text class={styles.expandIcon}>+</Text>
+                <Text class={styles.expandIcon}>Open</Text>
               </TouchableOpacity>
             )
           }
-          <Text>Hello</Text>
+          {
+            loading ? <ActivityIndicator size="small"/>
+            : (
+              <View style={styles.viewStyle}>
+                <Text style={styles.userName}>{match}</Text>
+                <Image source={require('../assets/images/profile.png')} style={styles.avatar}></Image>
+              </View>
+            )
+          }
         </View>
       </BottomSheet>
     </SafeAreaView>
   )
 }
 
-export default PerfectMatch;
+export default observer(PerfectMatch);
 
 const styles = StyleSheet.create({
   container: {
@@ -131,4 +157,16 @@ const styles = StyleSheet.create({
   expandIcon: {
     fontSize: 36,
   },
+  viewStyle: {
+    alignItems: 'center',
+  },
+  userName: {
+    fontSize: 34,
+    marginBottom: 20,
+  },
+  avatar: {
+    height: 200,
+    width: 200,
+    borderRadius: 100,
+  }
 })
