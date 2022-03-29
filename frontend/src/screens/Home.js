@@ -53,7 +53,7 @@ const Home = ({navigation}) => {
 						color={colors.blue}
 						style={{marginRight: 3, marginTop: 1.5}}
 					/>
-					<Text style={styles.dataText}>{item.place.name}</Text>
+					<Text style={styles.dataText}>{item.place_name}</Text>
 				</View>
 
 			</TouchableOpacity>
@@ -95,7 +95,7 @@ const Home = ({navigation}) => {
 						color={colors.blue}
 						style={{marginRight: 3, marginTop: 1.5}}
 					/>
-					<Text style={styles.dataText}>{item.place.name}</Text>
+					<Text style={styles.dataText}>{item.place_name}</Text>
 				</View>
 
 			</TouchableOpacity>
@@ -145,10 +145,6 @@ const Home = ({navigation}) => {
 				{/*h1 tag, and appointments*/}
 				<View style={styles.numAppointments}>
 					<Text style={styles.usernameTitle}>Hi {authStore.username}</Text>
-					<Text style={styles.usernameAppointments}>You have 
-						<Text style={{color:'red', fontFamily: 'Roboto', fontWeight: '500', fontSize: 16}}> n appointments </Text>
-						today
-					</Text>
 				</View>
 
 				<View style={styles.findPerfect}>

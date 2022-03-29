@@ -1,17 +1,3 @@
-// import React from 'react';
-// import {View, Text} from 'react-native';
-// import MapView, { Marker, Circle } from "react-native-maps";
-//
-// const Navigation = () => {
-// 	return (
-// 		<View>
-// 			<Text>Navigation</Text>
-// 		</View>
-// 	);
-// };
-//
-//
-// export default Navigation;
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Dimensions,  TextInput, TouchableOpacity} from "react-native";
@@ -26,10 +12,34 @@ const MapScreen = (props) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRegion, setMapRegion] = useState(null);
+  const [info] = useState([
+  {
+    subject: "Discrete Math",
+    topic: "Quiz Prep",
+    data: "22/02/2022",
+    locationName: "Coworking DC Lab",
+    icon: "dot-circle",
+    location: {
+      longitude: "68.25",
+      latitude: "48.70"
+    },
+  },  
+  {
+    subject: "Discrete Math",
+    topic: "Quiz Prep",
+    data: "22/02/2022",
+    locationName: "Coworking DC Lab",
+    icon: "dot-circle",
+    location: {
+      longitude: "71.48",
+      latitude: "51.18"
+    },
+  },
+  ]);
   const [friends] = useState([
     {
-      username: "bob",
-      description: "school friend",
+      username: "Подготовка к квизу",
+      description: "Алгебра",
       icon: "dot-circle",
       location: {
         longitude: "68.25",
@@ -37,8 +47,8 @@ const MapScreen = (props) => {
       }
     },
     {
-      username: "Alex",
-      description: "Childhood friend",
+      username: "Подготовка к мидке",
+      description: "Химия",
       icon: "dot-circle",
       location: {
         longitude: "71.48",
@@ -46,8 +56,8 @@ const MapScreen = (props) => {
       }
     },
     {
-      username: "Jack",
-      description: "Business Partner",
+      username: "Разобрать вопросы IELTS",
+      description: "Английский язык",
       icon: "dot-circle",
       location: {
         longitude: "71.39",
@@ -75,6 +85,8 @@ const MapScreen = (props) => {
     })();
   }, []);
 
+  const [isVerified, setIsVerified] = useState(false);
+
   return (
     <View style={styles.container}>
 
@@ -97,7 +109,7 @@ const MapScreen = (props) => {
           ></Circle>
         ) : null}
         {mapRegion ? (
-          <Marker
+          <Marker 
             coordinate={{
               longitude: mapRegion.longitude,
               latitude: mapRegion.latitude
@@ -143,15 +155,16 @@ const MapScreen = (props) => {
 
         </View>
         <View style = {styles.check}>
-          <TouchableOpacity>
+          <TouchableOpacity style={isVerified ? styles.verified : styles.notverified} onPress={() => setIsVerified(true)}>
             <View styles={styles.verified}>
-              <Text styles={styles.verifiedText}>Верифицированные</Text>
+              <Text style={[{ color: isVerified ? 'black' : 'white' }, styles.verifiedText]}>Верифицированные</Text>
             </View>
           </TouchableOpacity>
-          <View styles={styles.notverified}>
-            <Text> Неверифицированные</Text>
-          </View>
-
+          <TouchableOpacity style={isVerified ? styles.notverified : styles.verified} onPress={() => setIsVerified(false)}>
+            <View styles={styles.notverified}>
+              <Text style={[{ color: isVerified ?  'white' : 'black'}, styles.verifiedText]}> Неверифицированные</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
       </View>
@@ -162,13 +175,12 @@ const MapScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    width,
-    height
+    flex:1,
   },
   searchBoxHeader: {
     backgroundColor: '#29303E',
     width: '100%',
-    height: 150,
+    height: 170,
     justifyContent: 'space-around',
   },
   searchBox: {
@@ -192,14 +204,26 @@ const styles = StyleSheet.create({
       marginHorizontal: 20,
     },
     verified: {
-      width: 160,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '50%',
       height: 25,
+      borderRadius: 20,
       backgroundColor: '#fff',
     },
-    verifiedText: {
-      color: "#fff",
+    notverified: {
+      backgroundColor: "#29303E",
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '50%',
+      height: 25,
+      borderRadius: 20,
     },
-    notverified: {},
+    verifiedText: {
+      fontFamily: 'Roboto',
+      fontWeight: '400',
+      fontSize: 13,
+    },
   mapView: {
 		//opacity: 0.2,
     position: "absolute",

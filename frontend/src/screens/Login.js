@@ -88,7 +88,7 @@ const Login = ({navigation}) => {
 
 	//handle the username;
   const loginHandle = (userName, password) => {
-		signinStore.signIn('miko', '12345');
+		signinStore.signIn(data.email, data.password);
 		console.log("HANDLE LOGIN");
 
     // const foundUser = Users.filter( item => {
