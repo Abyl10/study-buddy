@@ -8,7 +8,7 @@ A mobile application for finding like-minded people in education.
   - ML: Project "Natasha"
 
 There are three main functionalities in our app: 
-  1) Finding ideal study groups and partners (By using machine learning) 
+  1) Finding perfect study groups and partners (By using machine learning) 
   2) Finding upcoming training meetings (implementation using maps and filters such as place, time, subject) 
   3) Create study meetings (zoom link for online meeting | choosing a place for offline meetings) 
 
